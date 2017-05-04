@@ -35,7 +35,7 @@ public class CheckedExceptionThrowingUserTest {
     }
 
     @Test
-    public void setPasswordWithInvalidPasswordExceptionMessages(){
+    public void setPasswordWithInvalidPasswordExceptionMessages() {
         User aUser = new User();
 
         try {

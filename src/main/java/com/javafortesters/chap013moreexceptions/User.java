@@ -6,19 +6,25 @@ public class User {
     private String username;
     private String password;
 
-    public User(){
-        this("username", "password");
+    public User() {
+        try {
+            this.username = "username";
+            setPassword("password");
+        }catch(InvalidPassword e){
+            throw new IllegalArgumentException(
+                    "Default password incorrect ", e);
+        }
     }
 
-    public User(String username, String password) {
+    public User(String username, String password) throws InvalidPassword {
         this.username = username;
         setPassword(password);
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws InvalidPassword {
 
         if(password.length()<7){
-            throw new IllegalArgumentException("Password must be > 6 chars");
+            throw new InvalidPassword("Password must be > 6 chars");
         }
 
         this.password = password;

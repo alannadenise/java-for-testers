@@ -1,6 +1,5 @@
 package com.javafortesters.chap011exceptions.examples;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
