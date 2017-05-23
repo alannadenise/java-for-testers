@@ -9,7 +9,7 @@ public class User {
     public User() {
         try {
             this.username = "username";
-            setPassword("password");
+            setPassword("Passw0rd");
         }catch(InvalidPassword e){
             throw new IllegalArgumentException(
                     "Default password incorrect ", e);
@@ -25,6 +25,14 @@ public class User {
 
         if(password.length()<7){
             throw new InvalidPassword("Password must be > 6 chars");
+        }
+
+        if(!password.matches(".*[0123456789]+.*")){
+            throw new InvalidPassword("Password must contain a number");
+        }
+
+        if(!password.matches(".*[A-Z]+.*")){
+            throw new InvalidPassword("Password must contain one uppercase letter");
         }
 
         this.password = password;

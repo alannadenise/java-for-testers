@@ -18,7 +18,7 @@ public class CheckedExceptionThrowingUserTest {
     @Test
     public void createDefaultUserWithNoThrowsInvalidPasswordException() {
         User aUser = new User();
-        assertEquals("password",aUser.getPassword());
+        assertEquals("Passw0rd",aUser.getPassword());
     }
 
     @Test
@@ -46,6 +46,5 @@ public class CheckedExceptionThrowingUserTest {
             assertTrue(e.getMessage().startsWith("Password must be > 6 chars"));
         }
     }
-
 
 }
