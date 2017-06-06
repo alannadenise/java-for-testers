@@ -65,4 +65,24 @@ public class StringsRevisitedTest {
         }
         assertEquals(6, letters.size());
     }
+
+    @Test
+    public void stringBuilderResize(){
+        StringBuilder myBuilder = new StringBuilder (4);
+        assertThat(myBuilder.capacity(), is (4));
+        myBuilder.append("HERE IS SOME TEXT");
+        assertThat(myBuilder.capacity(), is (17));
+    }
+
+    @Test
+    public void insertIntoAStringBuilder(){
+        StringBuilder myOtherBuilder = new StringBuilder();
+        assertThat(myOtherBuilder.toString().length(), is(0));
+        myOtherBuilder.append("HERES SOME ");
+        myOtherBuilder.insert(myOtherBuilder.toString().length(), "TEXT");
+        assertThat(myOtherBuilder.toString(), is("HERES SOME TEXT"));
+        myOtherBuilder.insert(4, " I");
+        assertThat(myOtherBuilder.toString(), is("HERE IS SOME TEXT"));
+    }
+
 }
