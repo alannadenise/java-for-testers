@@ -105,4 +105,9 @@ public class RandomDataTest {
         assertNotEquals(0, twenty);
     }
 
+    @Test
+    public void nextTest(){
+
+    }
+
 }
