@@ -3,9 +3,10 @@ package com.javafortesters.chap016randomdata;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Random;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
@@ -59,7 +60,7 @@ public class RandomDataTest {
         int arrayLength = generate.nextInt(100);
         byte[] randomByte = new byte[arrayLength];
         generate.nextBytes(randomByte);
-        Assert.assertEquals(arrayLength, randomByte.length);
+        assertEquals(arrayLength, randomByte.length);
     }
 
     @Test
@@ -106,8 +107,97 @@ public class RandomDataTest {
     }
 
     @Test
-    public void nextTest(){
+    public void nextGaussianDistribution(){
+        Random generate = new Random();
 
+        int oneDeviation = 0;
+        int twoDeviation = 0;
+        int threeDeviation = 0;
+        int fourDeviation = 0;
+
+        for(int x=0; x<1000; x++){
+            double gaussianDoubles = generate.nextGaussian();
+            if(gaussianDoubles > -1.0d && gaussianDoubles < 1.0d){
+                oneDeviation++;
+            }
+            if(gaussianDoubles > -2.0d && gaussianDoubles < 2.0d){
+                twoDeviation++;
+            }
+            if(gaussianDoubles > -3.0d && gaussianDoubles < 3.0d){
+                threeDeviation++;
+            }
+            if(gaussianDoubles > -4.0d && gaussianDoubles < 4.0d){
+                fourDeviation++;
+            }
+        }
+
+        float oneDeviationPercentage = (oneDeviation/1000f)*100f;
+        System.out.println("about 70% one standard deviation = " + oneDeviationPercentage);
+        float twoDeviationPercentage = (twoDeviation/1000f)*100f;
+        System.out.println("about 95% one standard deviation = " + twoDeviationPercentage);
+        float threeDeviationPercentage = (threeDeviation/1000f)*100f;
+        System.out.println("about 99% one standard deviation = " + threeDeviationPercentage);
+        float fourDeviationPercentage = (fourDeviation/1000f)*100f;
+        System.out.println("about 99.9% one standard deviation = " + fourDeviationPercentage);
+
+    }
+
+    @Test
+    public void ageDistribution(){
+        Random generate = new Random();
+        Map<Integer, Integer> allAges = new HashMap<Integer, Integer>();
+
+        for(int x=0; x<1000; x++){
+            int age = (int)(generate.nextGaussian() * 5 + 35);
+
+            int ageCount = 0;
+            if(allAges.containsKey(age)){
+                ageCount = allAges.get(age);
+            }
+            ageCount++;
+            allAges.put(age,ageCount);
+        }
+
+        System.out.println(allAges);
+
+        SortedSet<Integer> sortedAges = new TreeSet(allAges.keySet());
+        System.out.println(sortedAges);
+        for(int age : sortedAges) {
+            System.out.println(age + " : " + allAges.get(age));
+        }
+
+    }
+
+    @Test
+    public void randomSeed(){
+        Random generate = new Random(1234567L);
+
+        int seedInt = generate.nextInt();
+        System.out.println("Your random int value is: " + seedInt);
+        assertEquals(seedInt, 1042961893);
+
+        long seedLong = generate.nextLong();
+        System.out.println("Your random long value is: " + seedLong);
+        assertEquals(seedLong, -6749250865724111202L);
+    }
+
+    @Test
+    public void randomString(){
+        String validValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+
+        StringBuilder rString;
+
+        Random random = new Random();
+
+        rString = new StringBuilder();
+        for(int x=0; x<100; x++){
+            int rndIndex = random.nextInt(validValues.length());
+            char rChar = validValues.charAt(rndIndex);
+            rString.append(rChar);
+        }
+        System.out.println(rString.toString());
+        Assert.assertTrue(rString.length()==100);
+        Assert.assertTrue(rString.toString().matches("[A-Z ]+"));
     }
 
 }
