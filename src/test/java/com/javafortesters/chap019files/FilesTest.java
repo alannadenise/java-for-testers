@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import javax.sound.midi.Soundbank;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -84,6 +86,24 @@ public class FilesTest {
 
         System.out.println(aTempFile.length());
 
+    }
+
+    @Test
+    public void listTempDirectory(){
+        File tempDir = new File(System.getProperty("java.io.tmpdir"));
+        File[] fileList = tempDir.listFiles();
+
+        for(File fileInList : fileList){
+            String outputString = "";
+            if(fileInList.isDirectory()){
+                outputString = outputString + "DIR: ";
+            }else{
+                outputString = outputString + "FIL: ";
+            }
+
+            outputString = outputString + fileInList.getName();
+            System.out.println(outputString);
+        }
     }
 
 }
