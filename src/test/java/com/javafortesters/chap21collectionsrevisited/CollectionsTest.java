@@ -4,6 +4,8 @@ import com.javafortesters.domainentities.User;
 import com.javafortesters.domainentities.UserComparator;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -33,5 +35,25 @@ public class CollectionsTest {
          assertEquals( mrBeer.getUsername(), users[ 2]. getUsername());
          assertEquals( tiny.getUsername(), users[ 3]. getUsername());
          assertEquals( rich.getUsername(), users[ 4]. getUsername());
+    }
+
+    @Test
+     public void mapToSortedSetGetKeys(){
+         Map<String, String> map = new HashMap<>();
+
+         map.put("key2", "value2");
+         map.put("key1", "value1");
+         map.put("key4", "value4");
+         map.put("key3", "value3");
+
+         SortedSet<String> keys = new TreeSet<String>(map.keySet());
+
+         int valSuffix = 1;
+         for(String key : keys){
+              assertEquals("value" + valSuffix, map.get(key));
+
+              valSuffix+=1;
+         }
+
     }
 }
