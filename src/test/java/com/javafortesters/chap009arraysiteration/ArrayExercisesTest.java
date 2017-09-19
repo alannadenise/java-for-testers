@@ -87,10 +87,10 @@ public class ArrayExercisesTest {
     public void test2DArray(){
         int[][] myWorking = new int[16][];
 
-        for(int i =0; i < 16; i++){
-            myWorking[i] = new int[i+1];
-            for(int j = 0; j < (i+1); j++) {
-                myWorking[i][j] = j;
+        for(int row =0; row < 16; row++){
+            myWorking[row] = new int[row+1];
+            for(int column = 0; column < (row+1); column++) {
+                myWorking[row][column] = column;
             }
         }
         Chap009Methods.print2DPrintArray(myWorking);
