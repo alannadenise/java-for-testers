@@ -1,5 +1,6 @@
 package com.javafortesters.chap009arraysiteration;
 
+import com.javafortesters.chap009arrays.Chap009Methods;
 import com.javafortesters.domainentities.User;
 import org.junit.Test;
 
@@ -73,6 +74,28 @@ public class ArrayExercisesTest {
     public void createTriangle2dArray(){
         int[][] triangle = new int[16][];
 
+        for(int row=0; row < triangle.length; row++){
+            triangle[row] = new int[row+1];
+            for(int i=0; i < (row+1); i++){
+                triangle[row][i]=i;
+            }
+        }
+        Chap009Methods.print2DPrintArray(triangle);
     }
+
+    @Test
+    public void test2DArray(){
+        int[][] myWorking = new int[16][];
+
+        for(int i =0; i < 16; i++){
+            myWorking[i] = new int[i+1];
+            for(int j = 0; j < (i+1); j++) {
+                myWorking[i][j] = j;
+            }
+        }
+        Chap009Methods.print2DPrintArray(myWorking);
+    }
+
+
 
 }
